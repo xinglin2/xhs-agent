@@ -1,0 +1,19 @@
+{
+  "name": "@xhs/db",
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "migrate": "drizzle-kit migrate",
+    "generate": "drizzle-kit generate",
+    "studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.31.4",
+    "postgres": "^3.4.4"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.22.8",
+    "typescript": "^5.4.5",
+    "@types/node": "^20.14.0"
+  }
+}

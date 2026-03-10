@@ -1,0 +1,41 @@
+{
+  "name": "@xhs/api",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@xhs/shared": "workspace:*",
+    "@xhs/db": "workspace:*",
+    "@xhs/logger": "workspace:*",
+    "fastify": "^4.28.1",
+    "fastify-plugin": "^4.5.1",
+    "@fastify/cors": "^9.0.1",
+    "@fastify/jwt": "^8.0.1",
+    "@fastify/multipart": "^8.3.0",
+    "@fastify/rate-limit": "^9.1.0",
+    "openai": "^4.52.7",
+    "sharp": "^0.33.4",
+    "@aws-sdk/client-s3": "^3.600.0",
+    "@aws-sdk/s3-request-presigner": "^3.600.0",
+    "bullmq": "^5.12.6",
+    "ioredis": "^5.4.1",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.23.8",
+    "crypto-js": "^4.2.0",
+    "drizzle-orm": "^0.31.4",
+    "postgres": "^3.4.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}

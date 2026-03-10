@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --xhs-red: #FF2442;
+    --xhs-pink: #FFE4E8;
+    --xhs-gray: #F5F5F5;
+    --radius: 12px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-white text-xhs-dark font-sans antialiased;
+    min-width: 375px;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-200 rounded-full;
+  }
+}
+
+@layer components {
+  .btn-xhs-primary {
+    @apply bg-xhs-red text-white rounded-xhs font-semibold px-6 py-3 
+           transition-all duration-150 active:scale-95 hover:bg-red-500
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+
+  .btn-xhs-ghost {
+    @apply bg-transparent text-xhs-red border border-xhs-red rounded-xhs font-semibold px-6 py-3
+           transition-all duration-150 active:scale-95 hover:bg-xhs-pink
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .card-xhs {
+    @apply bg-white rounded-xhs shadow-xhs-card border border-gray-100;
+  }
+
+  .input-xhs {
+    @apply w-full px-4 py-3 rounded-xhs border border-gray-200 bg-xhs-gray
+           focus:outline-none focus:ring-2 focus:ring-xhs-red/20 focus:border-xhs-red
+           placeholder-gray-400 text-xhs-dark transition-colors;
+  }
+
+  .pill-selector {
+    @apply px-4 py-1.5 rounded-full border border-gray-200 text-sm font-medium
+           transition-all duration-150 cursor-pointer select-none;
+  }
+
+  .pill-selector-active {
+    @apply bg-xhs-red text-white border-xhs-red;
+  }
+
+  .pill-selector-inactive {
+    @apply bg-white text-gray-600 hover:border-xhs-red hover:text-xhs-red;
+  }
+
+  .skeleton {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .status-draft {
+    @apply bg-gray-100 text-gray-600;
+  }
+
+  .status-published {
+    @apply bg-green-100 text-green-700;
+  }
+
+  .status-failed {
+    @apply bg-red-100 text-red-700;
+  }
+
+  .status-pending {
+    @apply bg-yellow-100 text-yellow-700;
+  }
+}
+
+/* Safe area insets for mobile */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.mb-bottom-nav {
+  margin-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+}
