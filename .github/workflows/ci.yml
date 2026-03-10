@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: xhs_test
+          POSTGRES_USER: xhs
+          POSTGRES_PASSWORD: test
+        ports: ['5432:5432']
+      redis:
+        image: redis:7
+        ports: ['6379:6379']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm -r tsc --noEmit
+
+      - name: Test (API)
+        working-directory: apps/api
+        env:
+          DATABASE_URL: postgres://xhs:test@localhost:5432/xhs_test
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: test-secret
+          JWT_REFRESH_SECRET: test-refresh
+          AES_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
+        run: pnpm test
+
+      - name: Test (Publisher)
+        working-directory: apps/publisher
+        run: |
+          pip install -r requirements.txt
+          pytest tests/ -v
+
+      - name: Build
+        run: pnpm build
